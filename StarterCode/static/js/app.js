@@ -9,19 +9,19 @@ d3.json(url).then(function(data) {
 // Initialize the dashboard at start up 
 function init() {
 
-    // Use D3 to select the dropdown menu
+    // Dropdown menu
     let dropdownMenu = d3.select("#selDataset");
 
-    // Use D3 to get sample names and populate the drop-down selector
+    // Get sample names and populate the drop-down selector
     d3.json(url).then((data) => {
         
-        // Set a variable for the sample names
+        // Define a variable for the sample names
         let names = data.names;
 
         // Add  samples to dropdown menu
         names.forEach((id) => {
 
-            // Log the value of id for each iteration of the loop
+            // Log the value of id 
             console.log(id);
 
             dropdownMenu.append("option")
@@ -29,13 +29,13 @@ function init() {
             .property("value",id);
         });
 
-        // Set the first sample from the list
+        // Set the first sample 
         let sample_one = names[0];
 
         // Log the value of sample_one
         console.log(sample_one);
 
-        // Build the initial plots
+        // Build the plots
         buildMetadata(sample_one);
         buildBarChart(sample_one);
         buildBubbleChart(sample_one);
@@ -44,10 +44,10 @@ function init() {
     });
 };
 
-// Function that populates metadata info
+// Function t0 populates metadata info
 function buildMetadata(sample) {
 
-    // Use D3 to retrieve all of the data
+    //  Retrieve all of the data
     d3.json(url).then((data) => {
 
         // Retrieve all metadata
@@ -62,7 +62,7 @@ function buildMetadata(sample) {
         // Get the first index from the array
         let valueData = value[0];
 
-        // Clear out metadata
+        // Clear out 
         d3.select("#sample-metadata").html("");
 
         // Use Object.entries to add each key/value pair to the panel
@@ -77,10 +77,10 @@ function buildMetadata(sample) {
 
 };
 
-// Function that builds the bar chart
+// Build the bar chart
 function buildBarChart(sample) {
 
-    // Use D3 to retrieve all of the data
+    //  Retrieve all of the data
     d3.json(url).then((data) => {
 
         // Retrieve all sample data
@@ -119,15 +119,15 @@ function buildBarChart(sample) {
             title: "Top 10 OTUs Present"
         };
 
-        // Call Plotly to plot the bar chart
+        // Plot the bar chart
         Plotly.newPlot("bar", [trace], layout)
     });
 };
 
-// Function that builds the bubble chart
+//  Builds the bubble chart
 function buildBubbleChart(sample) {
 
-    // Use D3 to retrieve all of the data
+    // Retrieve all of the data
     d3.json(url).then((data) => {
         
         // Retrieve all sample data
@@ -167,12 +167,12 @@ function buildBubbleChart(sample) {
             xaxis: {title: "OTU ID"},
         };
 
-        // Call Plotly to plot the bubble chart
+        // Plot the bubble chart
         Plotly.newPlot("bubble", [trace1], layout)
     });
 };
 
-// Function that updates dashboard when sample is changed
+// Update dashboard when sample is changed
 function optionChanged(value) { 
 
     // Log the new value
